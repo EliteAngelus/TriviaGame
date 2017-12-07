@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trivia Game</title>
+</head>
+
+<!--BOOTSTRAP  -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css?family=Ranchers" rel="stylesheet">
+
+<!-- Jquery Link -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+<!-- CSS -->
+<style type="text/css">
+	body{
+		background-image: url("./assets/images/saved.png");
+		background-color: #dddddd;
+	}
+	.wrapper{
+		background-color: white;
+		width: 60%;
+		border-radius: 30px;
+		padding: 50px;
+		margin: 10% auto;
+		text-align: center;
+	}
+	h1{
+		font-family: 'Ranchers', cursive;
+		font-size: 50px;
+	}
+
+	#trivQuestion,
+	#trivButtons{
+		margin-bottom: 10px;
+
+	}
+
+
+</style>
+
+<body>
+
+<div class="container">
+	<div class="wrapper">
+		<h1>Trivia Game</h1>
+		<div id="trivQuestion"></div>
+		<div id="trivButtons"></div>
+		<div id="response"></div>
+	</div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script type="text/javascript">
+$(document).ready(function (){
+//PSUEDO CODE
+ //HAVE COMPUTER GIVE USER A QUESTION WITH MULTIPLE ANSWERS IF USER GUESSES CORRECT ANSWER COMPUTER WILL MOVE ON TO THE NEXT QUESTION.
+ //HAVE PROGRAM RUN THROUGH ARRAY OF QUESTIONS
+ //MAY NEED MULTIPLE ANSWER ARRAYS 
+var q1 = {
+	question : 'Who was the host for Kitchen Kabaret?',
+	answerArr
+	 : ['A. Fud Wrapper',
+				 'B. Cookie Ann Milk',
+				 'C. Bonnie Appetit',
+				 'D. Cherry Ontop'],
+
+	answer : 'Bonnie Appetit'
+};
+
+for (var i = 0; i < q1.answerArr.length; i++) {
+
+	   var button = $("<button>");
+          // Adding a class
+          button.addClass("triv");
+          // Added a data-attribute
+          button.attr("data-name", q1.answerArr
+          	[i]);
+          // Provided the initial button text
+          button.text(q1.answerArr
+          	[i]);
+          // Added the button to the HTML
+          $("#trivButtons").append(button)	
+}
+
+function logic(){
+	//FUNCTION THAT WILL RETURN THE VALUE OF THE BUTTON CLICKED.
+
+	$("button").on("click", function() {
+
+// USING THE "THIS" KEYWORD THE CODE IDENTIFIES WHICH BUTTON IS PRESSED BASED ON ITS DATA-NAME.
+		var answers = $(this).attr("data-name");
+//CONSOLE LOGS THE DATA-NAME IN THE CONSOLE. 
+		console.log(answers);
+
+	if(answers === "C. Bonnie Appetit"){
+		$("#response").html("Correct");
+	} else{
+		$("#response").html("Wrong!");
+
+	}
+
+});
+
+}
+
+$("#trivQuestion").html(q1.question);
+logic();
+	
+
+
+
+
+
+
+});	
+
+</script>
+</body>
+</html>
