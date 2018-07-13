@@ -1,160 +1,38 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Trivia Game</title>	
+    <title>Trivia Game</title>
 </head>
 <!--BOOTSTRAP  -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css?family=Ranchers" rel="stylesheet">
+<!-- CSS link -->
+<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 <!-- Jquery Link -->
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-<!-- CSS -->
-<style type="text/css">
-	body{
-		background-image: url("./assets/images/saved.png");
-		background-color: #dddddd;
-	}
-	.wrapper{
-		background-color: white;
-		width: 60%;
-		border-radius: 30px;
-		padding: 50px;
-		margin: 10% auto;
-		text-align: center;
-	}
-	h1{
-		font-family: 'Ranchers', cursive;
-		font-size: 50px;
-	}
-	#trivQuestion,
-	#trivButtons{
-		margin-bottom: 10px;
-	}
-</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
 <body>
 
-<div class="container">
-	<div class="wrapper">
-		<h1>Trivia Game</h1>
-		<div id="timer"></div>
-		<div id="trivQuestion"></div>
-		<div id="trivButtons"></div>
-		<div id="response"></div>
-	</div>
-</div>
-
-<!-- JAVASCRIPT -->
-<script type="text/javascript">
-$(document).ready(function (){
-//PSUEDO CODE
- //HAVE COMPUTER GIVE USER A QUESTION WITH MULTIPLE ANSWERS IF USER GUESSES CORRECT ANSWER COMPUTER WILL MOVE ON TO THE NEXT QUESTION.
- //HAVE PROGRAM RUN THROUGH ARRAY OF QUESTIONS
- //MAY NEED MULTIPLE ANSWER ARRAYS 
- // ---------------------------------------------------------------------------
-var currentQuestion = 0;
-var correct = 0; 
-var wrong = 0;
-var counter = 0;
-
-var countdownTimer = {
-		time : 30,
-		reset: function() {
-			this.time = 30;
-			$('#timer').html('<h3>' + this.time + ' seconds remaining</h3>');
-		}
-	}
-
-	 var start = function() {
-			counter = setInterval(countdownTimer.count, 1000);	
-		}
-
-start();
-
-// THE ARRAY CONTAINING THE QUESTION THE CHOICES FOR THE USER AND AN ARRARY CONTAINING TRUE AND FALSE VALUES THAT WILL BE SET TO OUR CHOICES ARRAY.
-var questionArr = [
-{
- question: "Who is the main character of Final Fantasy 7?",
- choices: ["Cloud Strife", "Barret Wallace", "Tifa Lockheart","RedXIII"],
- answer: "Cloud Strife",
- values:[true,false,false,false]
-},
-{
- question: "Who is Mega Man's arch nemesis?",
- choices: ["proto man", "rush","roll","dr. wily"],	
- answer: "dr. wily",
- values:[false,false,false,true]
-}
-]
-console.log(questionArr[1].question);
-console.log(questionArr[1].choices);
-
-// LOGIC FOR THE GAME TO RUN. 
-function logic(){
-
-// THE QUESTIONS ARE BEING PLACED IN A DIV ABOVE AS AN HTML USING questionArr above. 
-	$("#trivQuestion").html(questionArr[currentQuestion].question)
-// A FOR LOOP THAT WILL CREATE OUR ANSWER BUTTONS.
-		// VAR I IS SET TO 0, THIS WILL START WITH OUR FIRST INDEX IN THE ARRAY.
-		// Next, questionArr is being tied to the variable currentQuestion 
-		// *questionArr[currentQuestion]* which is currently *questionArr[0]*
-		// which will then look into our array (choices) and take its length.
-	for (var i = 0; i < questionArr[currentQuestion].choices.length; i++) {
-
-// We create a button 
-    var button = $("<button>");
-
-// Assigns the name of the array to the button.
-    button.text(questionArr[currentQuestion].choices[i]);
-
-// We create a class for the buttons 
-    button.addClass("answer-buttons");
-
-//ADDED AN ATTRIBUTE TO THE BUTTON THAT CREATES A PATH TO THE VALUES ARRAY AND TIES THE VALUE TO THE BUTTON. EXAMPLE. THE INDEX[0] OF VALUES WILL BE TIED TO THE INDEX[0] OF CHOICES.
-    button.attr("value", questionArr[currentQuestion].values[i]);
-// CREATES AN ATTRIBUTE DATA NAME AND SETS IT EQUAL TO THE ARRAY ITEMS NAME.
-    button.attr("Data-name", questionArr[currentQuestion].choices[i]);
-// WE APPEND the button in the div with the #trivButtons id.
-    $("#trivButtons").append(button);
-    
-    };
-
-//FUNCTION THAT WILL RETURN THE VALUE OF THE BUTTON CLICKED.
-
-	$("button").on("click", function() {
-// USING THE "THIS" KEYWORD THE CODE IDENTIFIES WHICH BUTTON IS PRESSED BASED ON ITS DATA-NAME.
-		var answers = $(this).attr("Data-name");
-//CONSOLE LOGS THE DATA-NAME IN THE CONSOLE. 
-		console.log(answers);
-// USING THE "THIS" WE CHECK THE VALUE OF THE BUTTON THAT IS CLICKED, IF THAT VALUE IS EQUAL TO TRUE. WE LOG "CORRECT".
-	if ($(this).attr("value") === "true") {
-			correct++;
-
-		$("#response").html("Correct");
-			i++;
-			currentQuestion++;
-			$("#trivQuestion").html(questionArr[currentQuestion].question);	
-
-	} else{
-
-		$("#response").html("Wrong!");
-			wrong++; 
-	}
+    <div class="container">
+        <div class="row"></div>
+        <div class="wins">0</div>
+        <div class="wrapper">
+            <h1>Trivia Game</h1>
+            <p id="timer">30</p>
+            <p id="trivQuestion"></p>
+            <div id="trivButtons"></div>
+            <p id="response"></p>
+        </div>
+        <div class="losses">0</div>
+    </div>
 
 
-console.log(currentQuestion);
-});
 
-}
 
-logic();
-	
-});	
-
-</script>
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript" src="./assets/javascript/app.js"></script>
 </body>
+
 </html>

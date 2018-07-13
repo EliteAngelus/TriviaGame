@@ -1,0 +1,32 @@
+body {
+    background: url("../images/loveless.gif") no-repeat center center fixed;
+    background-size: cover;
+    background-color: #fff;
+}
+
+
+/* .container {
+    margin: 50%;
+    background-color: aqua;
+    width: 100%;
+} */
+
+.wrapper {
+    background-color: blue;
+    width: 80%;
+    border-radius: 20px;
+    border: solid blue background-image: url(./demogorgon.jpg);
+    opacity: 0.9;
+    margin: 15% auto;
+    text-align: center;
+}
+
+.answer-buttons {
+    margin: 5px;
+}
+
+.wins,
+.losses {
+    color: white;
+    font-size: 25px;
+}
